@@ -1,4 +1,4 @@
-(function($, window, document, undefined) {
+(function() {
 
     'use strict';
 
@@ -65,5 +65,5 @@
 
     $.fn.lightGallery.modules.share = Share;
 
-})(jQuery, window, document);
+})();
 
