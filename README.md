@@ -38,6 +38,9 @@ $ npm install lg-share
 
 You can also directly download lg-share from github.
 
+#### CDN
+If you prefer to use a CDN you can load files via [jsdelivr](https://www.jsdelivr.com/projects/lg-share)
+
 #### Include Javascript files
 Include lg-share plugin after lightgallery.min.js.
 ``` html
