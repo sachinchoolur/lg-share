@@ -19,7 +19,9 @@
         this.core = $(element).data('lightGallery');
 
         this.core.s = $.extend({}, defaults, this.core.s);
-        this.init();
+        if (this.core.s.share) {
+            this.init();
+        }
 
         return this;
     };

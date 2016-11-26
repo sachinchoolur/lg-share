@@ -1,6 +1,6 @@
 {
   "name": "lg-share",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Social media share module for lightgallery.",
   "main": [
     "dist/lg-share.min.js"
