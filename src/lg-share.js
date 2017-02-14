@@ -48,14 +48,57 @@
 
         _this.core.$el.on('onAfterSlide.lg.tm', function(event, prevIndex, index) {
 
-            setTimeout(function() { 
-                $('#lg-share-facebook').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=' + (encodeURIComponent(_this.core.$items.eq(index).attr('data-facebook-share-url') || window.location.href)));
+            setTimeout(function() {
+	            
+	            var fbUrl, twUrl, twText, gpUrl, piUrl, piText, piMedia;
+	            fbUrl = twUrl = gpUrl = piUrl = window.location.href;
+	            twText = piText = piMedia = '';
+	            
+	            // Check whether it is a jQuery instance or dynamicEl
+	            if ( _this.core.$items instanceof jQuery ) {
+		            var $item = _this.core.$items.eq(index);
+		            
+		            // Facebook url
+		            fbUrl     = $item.attr('data-facebook-share-url') || fbUrl;
+		            
+		            // Twitter url + text
+		            twUrl     = $item.attr('data-twitter-share-url') || twUrl;
+		            twText    = $item.attr('data-tweet-text');
+		            
+		            // Google+ url
+		            gpUrl     = $item.attr('data-googleplus-share-url') || gpUrl;
+		            
+		            // Pinterest url + media + text
+		            piUrl     = $item.attr('data-pinterest-share-url') || piUrl;
+		            piText    = $item.attr( 'data-pinterest-text' );
+		            piMedia   = $item.attr( 'href' ) || $item.data( 'data-src' );
+		            
+	            } else {
+		            var item  = _this.core.$items[ index ];
+		            
+		            // Facebook url
+		            fbUrl     = 'facebookShareUrl' in item ? item.facebookShareUrl : fbUrl;
+		            
+		            // Twitter url + text
+		            twUrl     = 'twitterShareUrl' in item ? item.twitterShareUrl : twUrl;
+		            twText    = 'tweetText' in item ? item.tweetText : twText;
 
-                $('#lg-share-twitter').attr('href', 'https://twitter.com/intent/tweet?text=' + _this.core.$items.eq(index).attr('data-tweet-text') + '&url=' + (encodeURIComponent(_this.core.$items.eq(index).attr('data-twitter-share-url') || window.location.href)));
+		            // Google+ url
+		            gpUrl     = 'googleplusShareUrl' in item ? item.googleplusShareUrl : gpUrl;
+		            
+		            // Pinterest url + media + text
+		            piUrl     = 'pinterestShareUrl' in item ? item.pinterestShareUrl : piUrl;
+		            piText    = 'pinterestText' in item ? item.pinterestText : piText;
+		            piMedia   = 'src' in item ? item.src : piMedia;
+	            }
+	            
+	            $('#lg-share-facebook').attr('href', 'https://www.facebook.com/sharer/sharer.php?u=' + (encodeURIComponent( fbUrl )));
 
-                $('#lg-share-googleplus').attr('href', 'https://plus.google.com/share?url=' + (encodeURIComponent(_this.core.$items.eq(index).attr('data-googleplus-share-url') || window.location.href)));
+                $('#lg-share-twitter').attr('href', 'https://twitter.com/intent/tweet?text=' + twText + '&url=' + (encodeURIComponent( twUrl )));
 
-                $('#lg-share-pinterest').attr('href', 'http://www.pinterest.com/pin/create/button/?url=' + (encodeURIComponent(_this.core.$items.eq(index).attr('data-pinterest-share-url') || window.location.href)) + '&media=' + encodeURIComponent(_this.core.$items.eq(index).attr('href') || _this.core.$items.eq(index).attr('data-src')) + '&description=' + _this.core.$items.eq(index).attr('data-pinterest-text'));
+                $('#lg-share-googleplus').attr('href', 'https://plus.google.com/share?url=' + (encodeURIComponent( gpUrl )));
+
+                $('#lg-share-pinterest').attr('href', 'http://www.pinterest.com/pin/create/button/?url=' + (encodeURIComponent( piUrl )) + '&media=' + encodeURIComponent( piMedia ) + '&description=' + piText);
 
             }, 100);
         });
