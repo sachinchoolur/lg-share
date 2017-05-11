@@ -1,6 +1,6 @@
-/*! lg-share - v1.0.3 - 2016-11-26
+/*! lg-share - v1.0.3 - 2017-05-11
 * http://sachinchoolur.github.io/lightGallery
-* Copyright (c) 2016 Sachin N; Licensed GPLv3 */
+* Copyright (c) 2017 Sachin N; Licensed GPLv3 */
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -8,15 +8,16 @@
     define(['jquery'], function (a0) {
       return (factory(a0));
     });
-  } else if (typeof exports === 'object') {
+  } else if (typeof module === 'object' && module.exports) {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node.
     module.exports = factory(require('jquery'));
   } else {
-    factory(jQuery);
+    factory(root["jQuery"]);
   }
 }(this, function ($) {
+
 
 (function() {
 
@@ -141,7 +142,6 @@
     $.fn.lightGallery.modules.share = Share;
 
 })();
-
 
 
 }));
